@@ -16,6 +16,7 @@ import sys
 # 导入用户库
 sys.path.append("..")
 from stock_industry_analysis.lead_stock_primacy import *
+from stock_industry_analysis.industry_index_custom import *
 from python_base.plot_method import *
 
 out_file_folder = '..\\stock_industry_analysis\\result\\back_test\\'
@@ -34,7 +35,8 @@ def select_industry_code(trading_day, back_period, level_flag):
     :return:
     """
     global limit_industry_num
-    herding_index_series = sort_industry_by_herding_index(trading_day, back_period, level_flag)
+    # herding_index_series = sort_industry_by_herding_index(trading_day, back_period, level_flag)
+    herding_index_series = sort_industry_by_custom_momentum(trading_day, back_period, level_flag)
     industry_code_list = list(herding_index_series.index)[:limit_industry_num]
     return industry_code_list
 
@@ -48,14 +50,15 @@ def back_test_industry_code_out(start_date, end_date, back_period):
     :return:
     """
     level_flag = 1
-    out_file_name = out_file_folder + "position_back_test_level1.csv"
+    out_file_name = out_file_folder + "position_back_test_level.csv"
     f = open(out_file_name, 'wb')
     f.write(',time,position,code\n')
     index_num = 0
     for trade_day in trading_day_list:
         trading_day = trade_day[:-1]
+        weekday = datetime.strptime(trading_day, '%Y%m%d').weekday()
         trading_day = change_trading_day_format(trading_day)
-        if start_date <= trading_day <= end_date:
+        if start_date <= trading_day <= end_date and weekday == 4:
             industry_code_list = select_industry_code(trading_day, back_period, level_flag)
             industry_position_dict = calc_industry_position_equal_market(industry_code_list, trading_day)
             for industry_code, position in industry_position_dict.items():
@@ -137,7 +140,7 @@ def back_test_market_value(start_date, end_date, back_period, holding_period):
     while bin_shift_day <= end_date:
         # 换仓那天的数据是用不到的，所以选择用前一天的数据生成选择列表
         pre_begin_day = get_next_trading_day_stock(begin_day, -1)
-        industry_code_list = select_industry_code(pre_begin_day, back_period)
+        industry_code_list = select_industry_code(pre_begin_day, back_period, 2)
         industry_hold_yield, mean_yield_series = select_code_list_holding_period(industry_code_list, begin_day, holding_period)
         period_yield_series = strategy_net_value * mean_yield_series
         strategy_net_list = strategy_net_list + list(period_yield_series)
@@ -180,8 +183,8 @@ def result_print_out(strategy_net_series):
 
 
 if __name__ == '__main__':
-    start_date = '2017-01-01'
-    end_date = '2018-08-08'
+    start_date = '2016-01-01'
+    end_date = '2018-10-08'
     back_period = 5
     holding_period = 5
     back_test_industry_code_out(start_date, end_date, back_period)
