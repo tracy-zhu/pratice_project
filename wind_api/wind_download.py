@@ -66,6 +66,26 @@ def nation_debt_spread_and_index(start_date, end_date):
     plt.savefig(out_file_name)
 
 
+def nation_debt_china_usa(start_date, end_date):
+    """
+    绘制出中国和美国10年期国债收益率之差；
+    :param start_date:
+    :param end_date:
+    :return:
+    """
+    var_list = ["M1001654", "G0000891"]
+    raw_df = download_data_wind(start_date, end_date, var_list)
+    yield_spread = raw_df[var_list[0]] - raw_df[var_list[1]]
+    fig, ax = plt.subplots()
+    ax.plot(yield_spread, color='r', label="nation debt yield spread china&usa")
+    ax.legend(loc="upper left")
+    title = "nation debt yield spread china&usa"
+    plt.title(title)
+    fig.set_size_inches(23.2, 14.0)
+    out_file_name = out_file_folder + title + ".png"
+    plt.savefig(out_file_name)
+
+
 def credit_spread_china(start_date, end_date):
     """
     用于画出中国1年期AAA级债券和AA级债券的利差
@@ -345,7 +365,7 @@ def PMI_stat(start_date, end_date):
         n = 0
         pmi_list = []
         for var_code in var_list:
-            print index_date, var_code
+            print (index_date, var_code)
             pmi = download_data_wind(index_date, index_date, var_code)
             pmi_value = pmi.values[-1][-1]
             pmi_list.append(pmi_value)
@@ -470,14 +490,14 @@ def download_credit_and_loan_CHI(start_date, end_date):
 if __name__ == '__main__':
     # var_list = pd.DataFrame.from_csv('for_haoran.csv')
     start_date = '2012-01-01'
-    end_date = '2018-08-20'
+    end_date = '2018-10-29'
     # eb_tb_dl(start_date, end_date, list(var_list['var']))
     # nation_debt_spread_and_index(start_date, end_date)
         # credit_spread_china(start_date, end_date)
         # credit_spread_usa(start_date, end_date)
         # credit_spread_eur(start_date, end_date)
     # TIPS_and_inflation_expecation(start_date, end_date)
-    credit_spread_china(start_date, end_date)
+    # credit_spread_china(start_date, end_date)
     # A_bond_and_inverse_pe_index(start_date, end_date)
-    # credit_spread_usa(start_date, end_date)
+    credit_spread_usa(start_date, end_date)
     # download_credit_and_loan_CHI(start_date, end_date)

@@ -1,6 +1,6 @@
 ## -*- coding: gb2312 -*
 
-from Python_Data_Type import *
+from python_base.Python_Data_Type import *
 
 #响应信息
 class CRsp_Info_Field:

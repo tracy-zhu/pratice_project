@@ -76,7 +76,7 @@ def turnover_rate_and_total_match_volume(conn, start_date, end_date, out_file_fo
     turnover_rate_a_share_list = []
     for trade_day in total_match_volume.index:
         trading_day = trade_day.strftime("%Y%m%d")
-        print trading_day
+        print (trading_day)
         turnover_rate = get_turnover_rate(conn, trading_day)
         turnover_rate_a_share_list.append(turnover_rate)
     turnover_rate_series = Series(turnover_rate_a_share_list, index=total_match_volume.index)

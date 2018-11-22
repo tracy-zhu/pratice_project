@@ -105,7 +105,7 @@ def rsrs_std_cor_right_mean(data2, ndays=5):
     """
     计算RSRS右偏修正标准分的ndays均线
     """
-    data2['rsrs_std_cor_right_mean'] = data2.groupby('sec_code')['rsrs_std_cor_right'].apply(pd.rolling_mean, ndays)
+    data2['rsrs_std_cor_right_mean'] = data2.groupby('sec_code')['rsrs_std_cor_right'].apply(lambda x: x.rolling(window=ndays).mean())
     print('RSRS右偏修正标准分均线已计算')
     return data2
 
@@ -189,7 +189,7 @@ class Context():
         self.start_date = start_date
         self.end_date = end_date
         self.S = S
-        self.sec_code = '000300.SH'
+        self.sec_code = '000905.SH'
 
 
 def trans_cumprod_pct(pct_chg_series):
@@ -216,11 +216,11 @@ def trans_cumprod_pct_with_limit_loss(pct_chg_series, limit_loss):
             period_hold_percent = period_hold_percent * (1 + float(pct_chg) / 100)
             loss_pct = period_hold_percent - 1
             if loss_pct < limit_loss:
-                print loss_pct
+                print(loss_pct)
                 pct_chg = 0
                 flag = 1
             if pct_chg != 0 and pct_chg_list[index+1] == 0:
-                print "that's switch"
+                print("that's switch")
                 period_hold_percent = 1
                 flag = 0
             if flag == 1:
@@ -264,11 +264,14 @@ def back_test_by_indicator(indicator_series, contxet):
     :param indicator_series:
     :return:
     """
-    global context
+    # global context
+    holding_cumprod_pct = 0
+    index_cumprod_pct = 0
+    total_fee = 0
     bilateral_fee = 0.004
     trade_times = 0
     position_list = []
-    df_300 = get_index_data("000300.SH", context.start_date, context.end_date)
+    df_300 = get_index_data("000300.SH", '2008-01-01', '2018-11-12')
     index_series = pd.to_datetime(df_300['time'], format='%Y/%m/%d %H:%M:%S')
     pct_chg_series = Series(df_300.pct_chg.values, index=index_series)
     # pct_chg_series = Series(index_df.pct_chg.values, index=index_df.time)
@@ -296,17 +299,18 @@ def back_test_by_indicator(indicator_series, contxet):
         #     if indicator < -1 * context.S:
         #         position = -1
         position_list.append(position)
-    print "trade times is " + str(trade_times)
+    print ("trade times is " + str(trade_times))
     position_series = Series(position_list, index=indicator_series.index)
     holding_pct_series = pct_chg_series.shift(-1) * position_series
     holding_pct_series.dropna(inplace=True)
-    pct_chg_series = pct_chg_series[pct_chg_series.index >= holding_pct_series.index[0]]
-    holding_cumprod_pct = trans_cumprod_pct(holding_pct_series)
-    index_cumprod_pct = trans_cumprod_pct(pct_chg_series)
-    total_fee = trade_times * bilateral_fee
-    holding_cumprod_pct.plot()
-    # holding_cumprod_pct_with_limit_loss.plot()
-    index_cumprod_pct.plot()
+    if len(holding_pct_series) > 0:
+        pct_chg_series = pct_chg_series[pct_chg_series.index >= holding_pct_series.index[0]]
+        holding_cumprod_pct = trans_cumprod_pct(holding_pct_series)
+        index_cumprod_pct = trans_cumprod_pct(pct_chg_series)
+        total_fee = trade_times * bilateral_fee
+    # holding_cumprod_pct.plot()
+    # # holding_cumprod_pct_with_limit_loss.plot()
+    # index_cumprod_pct.plot()
     return holding_cumprod_pct, index_cumprod_pct, total_fee
 
 
@@ -321,7 +325,7 @@ def back_test_by_indicator_upgrade(data_ind, contxet):
     position_list = []
     trade_times = 0
     data_ind.dropna(subset=['rsrs_std_cor_right'], inplace=True)
-    df_300 = get_index_data("000300.SH", context.start_date, context.end_date)
+    df_300 = get_index_data("000905.SH", context.start_date, context.end_date)
     index_series = pd.to_datetime(df_300['time'], format='%Y/%m/%d %H:%M:%S')
     pct_chg_series = Series(df_300.pct_chg.values, index=index_series)
     # pct_chg_series = Series(index_df.pct_chg.values, index=index_df.time)
@@ -351,7 +355,7 @@ def back_test_by_indicator_upgrade(data_ind, contxet):
         #     if indicator < -1 * context.S and ma_signal < 0:
         #         position = -1
         position_list.append(position)
-    print "trade times is " + str(trade_times)
+    print("trade times is " + str(trade_times))
     position_series = Series(position_list, index=data_ind.tradeday)
     holding_pct_series = pct_chg_series.shift(-1) * position_series
     holding_pct_series.dropna(inplace=True)
@@ -367,6 +371,7 @@ def back_test_by_indicator_upgrade(data_ind, contxet):
 def calc_evaluation_index(holding_cumprod_pct):
     """
     根据策略收益率序列计算出策略的参数：夏普比，最大回撤，年化收益率
+    年化收益率, 夏普比仅适用于日线数据，最大回撤可以应用到其他数据；
     :param holding_cumprod_pct:
     :return:
     """
@@ -380,9 +385,9 @@ def calc_evaluation_index(holding_cumprod_pct):
             max_value = max(max_value, holding_cumprod_pct.loc[index_name])
         res.loc[index_name, 'drawback'] = float(holding_cumprod_pct.loc[index_name]) / float(max_value) - 1
     max_drowback = res['drawback'].min()
-    print "annulized return is {}%".format(annulized_return * 100)
-    print "sharp ratio is {}".format(sharpe_ratio)
-    print "max drawback is {}%".format(max_drowback * 100)
+    print("annulized return is {}%".format(annulized_return * 100))
+    print("sharp ratio is {}".format(sharpe_ratio))
+    print("max drawback is {}%".format(max_drowback * 100))
     return annulized_return, sharpe_ratio, max_drowback
 
 
@@ -407,16 +412,16 @@ def get_minute_data(index_code, start_date, end_date, period):
 
 
 if __name__ == '__main__':
-    start_date = '2004-01-01'
-    end_date = '2018-10-10'
+    start_date = '2005-01-01'
+    end_date = '2018-11-21'
     period = '1min'
     index_code = '000300.SH'
     S = 0.7
     N = 16
     M = 300
     limit_loss = -0.12
-    df_300 = get_index_data("000300.SH", start_date, end_date)
-    df_001 = get_index_data("000001.SH", start_date, end_date)
+    df_300 = get_index_data("000905.SH", start_date, end_date)
+    df_001 = get_index_data("000300.SH", start_date, end_date)
     data = pd.concat([df_300, df_001])
     data = data[['time', 'code', 'open', 'high', 'low', 'close']]
     data.rename(columns={'time': 'tradeday', 'code': 'sec_code', 'open': 'open_slice', 'high': 'high_slice',

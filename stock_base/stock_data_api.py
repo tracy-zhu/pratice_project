@@ -115,7 +115,7 @@ def get_stock_list_description(stock_code_list, trading_day, back_period):
     pct_chg_dict = defaultdict()
     start_date = get_next_trading_day_stock(trading_day, -1 * back_period)
     for stock_code in stock_code_list:
-        print stock_code, start_date, trading_day
+        print(stock_code, start_date, trading_day)
         stock_df = get_stock_df(stock_code, start_date, trading_day)
         if len(stock_df) > 0:
             stock_df = stock_df[stock_df.PCT_CHG > -100]
@@ -325,14 +325,14 @@ def find_all_stock_concept_list(trading_day):
     out_file_name = "..\\stock_base\\result\\all_concept_list.txt"
     f = open(out_file_name, 'wb')
     for concept_name in concept_all_list:
-        print>>f, concept_name
+        f.write(concat_name+'\n')
     f.close()
     return concept_all_list
 
 
 def find_all_stock_concept_list_ifind(trading_day):
     """
-    找出当个交易日，同花顺对应的所有概念的股票代码
+    找出当个交易日，同花顺对应的所有概念代码
     :param trading_day:
     :return: "block_code, block_name"
     """
@@ -438,7 +438,7 @@ def find_stock_up_limit_time_from_raw_data(stock_code, trading_day):
     try:
         df_table = pd.read_csv(data_file_name)
     except:
-        print "there is no file name " + file_name
+        print("there is no file name " + file_name)
     else:
         start_time = trading_day + ' 09:30'
         df_table.index = df_table.time
@@ -517,7 +517,7 @@ def read_stock_minute_data(stock_code, trading_day):
     try:
         df_table = pd.read_csv(data_file_name)
     except:
-        print "there is no file name " + file_name
+        print("there is no file name " + file_name)
     else:
         df_table.index = df_table.time
     return df_table
@@ -536,7 +536,7 @@ def read_stock_tick_data(stock_code, trading_day):
     try:
         stock_df = pd.read_csv(file_name)
     except:
-        print "there is no file for " + stock_code + " in " + trading_day
+        print("there is no file for " + stock_code + " in " + trading_day)
     else:
         stock_df.index = stock_df.time
         stock_df = stock_df[stock_df.index >= 93000]
@@ -552,11 +552,11 @@ def read_stock_tick_data_qian(stock_code, trading_day):
     """
     stock_df = DataFrame()
     stock_name = ('_').join(stock_code.split('.'))
-    file_name = stock_tick_file_path_qian + stock_name + '_' + trading_day + "_" + trading_day + '.csv'
+    file_name = stock_tick_file_path_qian + trading_day + "\\" + stock_name + '_' + trading_day + "_" + trading_day + '.csv'
     try:
         stock_df = pd.read_csv(file_name)
     except:
-        print "there is no file for " + stock_code + " in " + trading_day
+        print("there is no file for " + stock_code + " in " + trading_day)
     else:
         stock_df.index = stock_df.time
         open_time  = trading_day + " 09:30:00"
@@ -605,6 +605,15 @@ def change_trading_day_date_stock(trading_day):
     trading_day_date = date(int(trading_day_list[0]), int(trading_day_list[1]), int(trading_day_list[2]))
     return trading_day_date
 
+
+def chang_time_to_str(trading_time):
+    """
+    将df中格式的time格式转化为str格式
+    :param trading_time:
+    :return:
+    """
+    trading_day = str(trading_time.year) + '-' + str(trading_time.month) + '-' + str(trading_time.day)
+    return trading_day
 
 
 def get_all_stock_code_list(trading_day):
@@ -736,6 +745,52 @@ def calc_stock_predict_pe(stock_code, trading_day):
     if predict_profit_fy1 > 0:
         predict_pe = float(close_price * total_share) / float(predict_profit_fy1)
     return predict_pe
+
+
+def get_index_stock_list(index_name, trading_day):
+    """
+    获取指数的成分股列表，指数有沪深300，中证500，上证50
+    :param index_name:hs300, sh50, zz500;
+    :param trading_day:
+    :return:
+    """
+    sql = 'SELECT * FROM stock_db.{index_name}_tb WHERE DATE = \"{trading_day}\"'.format(index_name=index_name, trading_day=trading_day)
+    tp_table = fetchall_sql(sql)
+    df_table = pd.DataFrame(list(tp_table))
+    df_table.columns = retrieve_column_name('stock_db', index_name + '_tb')
+    constituent_df = df_table.set_index('THSCODE')
+    return constituent_df
+
+
+def get_index_stock_df(start_date, end_date, index_name):
+    """
+    获取某个指数的成分股的日线列表，沪深300，中证500，上证50；
+    :param start_date:
+    :param end_date:
+    :param index_name:000300.SH, 000905.SH, 000016.SH
+    :return:
+    """
+    sql = 'SELECT * FROM stock_db.daily_price_tb WHERE time  >= \"{start_date}\" AND time ' \
+          ' <=  \"{end_date}\"'.format(start_date=start_date, end_date=end_date)
+    tp_table = fetchall_sql(sql)
+    df_table = pd.DataFrame(list(tp_table))
+    df_table.columns = retrieve_column_name('stock_db', 'daily_price_tb')
+    df_table = df_table[(df_table.PCT_CHG > -12) & (df_table.PCT_CHG < 12)]
+    df_table = df_table.set_index('code')
+
+    index_code = 'hs300'
+    if index_name == '000300.SH':
+        index_code = 'hs300'
+    elif index_name == '000905.SH':
+        index_code = 'zz500'
+    elif index_name == '000016.SH':
+        index_code = 'sh50'
+    # 只考虑指数中的股票，沪深300，上证50，或者中证500
+    constituent_df = get_index_stock_list(index_code, end_date)
+    df_table = df_table.join(constituent_df)
+    df_table = df_table.dropna(subset=['WEIGHT'])
+    df_table['code'] = df_table.index
+    return df_table
 
 
 if __name__ == '__main__':

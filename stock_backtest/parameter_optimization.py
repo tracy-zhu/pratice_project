@@ -17,11 +17,12 @@ from techiniacl_analysis_stock.rsrs_research import *
 
 
 start_date = '2008-01-01'
-end_date = '2018-08-31'
+end_date = '2018-11-12'
 S = 0.7
+context = Context(start_date, end_date, S)
 N_list = range(10, 40)
 M_list = range(100, 400, 20)
-data = get_index_data("000300.SH", start_date, end_date)
+data = get_index_data("000905.SH", start_date, end_date)
 data = data[['time', 'code', 'open', 'high', 'low', 'close']]
 data.rename(columns={'time': 'tradeday', 'code': 'sec_code', 'open': 'open_slice', 'high': 'high_slice',
                      'low': 'low_slice', 'close': 'close_slice'}, inplace=True)
@@ -34,11 +35,11 @@ for N in N_list:
     for M in M_list:
         print(M, N)
         data_ind = RSRS(data, N, M, S=0.7, ndays=5)
-        data_ind = data_ind[data_ind.sec_code == '000300.SH']
+        data_ind = data_ind[data_ind.sec_code == '000905.SH']
         indicator_series = Series(data_ind['rsrs_std_cor_right'].values, index=data_ind.tradeday)
         indicator_series = indicator_series.dropna()
         context = Context(start_date, end_date, S)
-        holding_cumprod_pct, index_cumprod_pct = back_test_by_indicator(indicator_series, context)
+        holding_cumprod_pct, index_cumprod_pct, total_fee = back_test_by_indicator(indicator_series, context)
         annulized_return, sharpe_ratio, max_drowback = calc_evaluation_index(holding_cumprod_pct)
         return_dict[N, M] = annulized_return
         sharpe_dict[N, M] = sharpe_ratio
@@ -59,7 +60,7 @@ sharpe_mat = convert_dict_df(sharpe_dict)
 cmap = sns.color_palette("RdBu_r", 40)
 fig = plt.figure(figsize=(12, 8))
 ax2 = plt.subplot(111)
-sns.heatmap(drawback_mat, yticklabels=True, annot=True, cmap=cmap, linecolor='black', linewidths=0.05, ax=ax2, cbar=True)
+sns.heatmap(res_mat, yticklabels=True, annot=True, cmap=cmap, linecolor='black', linewidths=0.05, ax=ax2, cbar=True)
 # ax2.set_title(ths_time)
 plt.yticks(rotation=0)
 #

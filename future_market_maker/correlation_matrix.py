@@ -57,7 +57,7 @@ if __name__ == '__main__':
     # instrument_id_list = ["I1809", "I1901","J1809", "J1901", "JM1809", "JM1901", "RB1810", "RB1901", "RB1905"]
     instrument_id_list = ["AL1809", "AL1810", "AL1811", "CU1809", "CU1810", "CU1811", "NI1811", "NI1901" , "ZN1809", "ZN1810", "ZN1811"]
     for instrument_id in instrument_id_list:
-        print instrument_id
+        print(instrument_id)
         vwap_yield = get_days_vwap_yield(instrument_id, end_date, frequency, period)
         yield_dict[instrument_id] = vwap_yield
 

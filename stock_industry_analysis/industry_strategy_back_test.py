@@ -50,6 +50,7 @@ def back_test_industry_code_out(start_date, end_date, back_period):
     :return:
     """
     level_flag = 1
+    industry_position_dict = defaultdict()
     out_file_name = out_file_folder + "position_back_test_level.csv"
     f = open(out_file_name, 'wb')
     f.write(',time,position,code\n')
@@ -61,11 +62,12 @@ def back_test_industry_code_out(start_date, end_date, back_period):
         if start_date <= trading_day <= end_date and weekday == 4:
             industry_code_list = select_industry_code(trading_day, back_period, level_flag)
             industry_position_dict = calc_industry_position_equal_market(industry_code_list, trading_day)
+        if len(industry_position_dict) > 0:
             for industry_code, position in industry_position_dict.items():
                 str_code = str(industry_code.split('.')[0]) + ".SL"
                 str_line = str(index_num) + ',' + trading_day + ',' + str(position) + ',' + str_code + '\n'
                 f.write(str_line)
-                index_num += 1
+            index_num += 1
     f.close()
 
 
@@ -147,7 +149,7 @@ def back_test_market_value(start_date, end_date, back_period, holding_period):
         begin_day = bin_shift_day
         bin_shift_day = get_next_trading_day_stock(begin_day, holding_period)
         strategy_net_value = strategy_net_value * mean_yield_series.values[-1]
-        print begin_day
+        print(begin_day)
     strategy_net_series = Series(strategy_net_list)
     return strategy_net_series
 
@@ -184,9 +186,19 @@ def result_print_out(strategy_net_series):
 
 if __name__ == '__main__':
     start_date = '2016-01-01'
-    end_date = '2018-10-08'
+    end_date = '2018-10-11'
     back_period = 5
     holding_period = 5
     back_test_industry_code_out(start_date, end_date, back_period)
     # strategy_net_series = back_test_market_value(start_date, end_date, back_period, holding_period)
     # result_print_out(strategy_net_series)
+
+    stock_code = '601857.SH'
+    trading_day = '2018-10-23'
+    concept_list = find_stock_concept(stock_code, trading_day)
+    for concept in concept_list:
+        print(concept)
+
+    concept_all_list = find_all_stock_concept_list(trading_day)
+    for concept in concept_all_list:
+        print(concept)

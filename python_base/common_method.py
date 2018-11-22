@@ -13,8 +13,8 @@ from datetime import datetime
 from datetime import timedelta
 from sklearn import linear_model
 from collections import defaultdict
-from python_base.Line_Text_To_Best_Marketdata import *
-from python_base.Quote_File_Manage import *
+# from python_base.Line_Text_To_Best_Marketdata import *
+# from python_base.Quote_File_Manage import *
 
 import pandas as pd
 import numpy as np
@@ -146,7 +146,7 @@ def read_data(instrument_id, trading_day):
         f = open(file_name, "r")
     except IOError:
         str_line = "there is no file for " + instrument_id + " in " + trading_day
-        print str_line
+        print(str_line)
     else:
         f.close()
         quote_data = pd.read_csv(file_name, header=0, index_col=False, names=G_TICK_COLUMNS)
@@ -170,7 +170,7 @@ def read_data_with_time_index(instrument_id, trading_day):
         f = open(file_name, "r")
     except IOError:
         str_line = "there is no file for " + instrument_id + " in " + trading_day
-        print str_line
+        print (str_line)
     else:
         f.close()
         quote_data = pd.read_csv(file_name, header=0, index_col=False, names=G_TICK_COLUMNS)
@@ -294,7 +294,7 @@ def get_main_instrument_id(instrument_list):
             if quote_map[main_instrument_id].Total_Match_Volume > LIMIT_TRADE_VOLUME:
                 return main_instrument_id, sub_instrument_id
             else:
-                print "Can't find the correct instrument"
+                print ("Can't find the correct instrument")
                 return None, None
     else:
         return None, None
@@ -503,7 +503,7 @@ if __name__ == '__main__':
         if trading_day > '20170814':
             open_price = get_open_price_from_quote_data(instrument_id, trading_day)
             close_price = get_close_price(instrument_id, trading_day)
-            print>>f, trading_day, ',', open_price, ',', close_price
+            print>>(f, trading_day, ',', open_price, ',', close_price)
     # instrument_file_list = get_instrument_file_list(trading_day)
     # for variety, instrument_list in instrument_file_list.items():
     #     main_instrument_id, _ = get_main_instrument_id(instrument_list)

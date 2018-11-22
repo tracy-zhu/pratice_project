@@ -10,28 +10,30 @@ Thu 2018/03/15
 
 # 导入系统库
 import sys
-from WindPy import w
+# from WindPy import w
 
 # 导入用户库
 sys.path.append("..")
 from stock_base.stock_data_api import *
 
 trading_day_list_file_name =  "F:\\tool\\base_data\\Trading_Day.txt"
-trading_day_list_file = open(trading_day_list_file_name, "w")
+trading_day_list_file = open(trading_day_list_file_name, "wb")
 
 start_date = '2008-01-01'
 trading_date = datetime.now()
 end_date = trading_date.strftime('%Y-%m-%d')
 
-w.start()
+# w.start()
 
 # index_df = get_index_data('000300.SH', start_date, end_date)
-data = w.tdays(start_date, end_date)
-trading_day_list = data.Times
+index_df = get_index_data('000300.SH',start_date, end_date)
+# data = w.tdays(start_date, end_date)
+trading_day_list = index_df.time
 
 for trading_day in trading_day_list:
     trading_day = trading_day.strftime("%Y%m%d")
-    print trading_day
-    print>>trading_day_list_file, trading_day
+    print (trading_day)
+    str_line = trading_day + '\n'
+    trading_day_list_file.write(str_line)
 
 trading_day_list_file.close()

@@ -11,7 +11,7 @@ Tue 2016/10/11
 @author: Tracy Zhu
 """
 
-from common_method import *
+from python_base.common_method import *
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 

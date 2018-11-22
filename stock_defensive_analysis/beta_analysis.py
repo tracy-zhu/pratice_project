@@ -22,7 +22,7 @@ from stock_base.stock_data_api import *
 holding_days = 60
 # now = datetime.now()
 # end_date = now.strftime('%Y-%m-%d')
-end_date = '2018-05-07'
+end_date = '2018-11-16'
 start_date = get_next_trading_day_stock(end_date, -1 * holding_days)
 index_code = "000300.SH"
 
@@ -124,15 +124,15 @@ def get_beta_indicator_dict(all_stock_code_list, start_date, end_date):
 indicator_select_code_list, positive_select_code, negative_select_code = get_beta_indicator_dict(all_stock_code_list, start_date, end_date)
 for stock_code in indicator_select_code_list:
     chi_name = find_stock_chi_name(stock_code)
-    print stock_code, ',', chi_name
+    print(stock_code, ',', chi_name)
 
 for stock_code in positive_select_code:
-    print "positive num"
+    print("positive num")
     chi_name = find_stock_chi_name(stock_code)
-    print stock_code, ',', chi_name
+    print(stock_code, ',', chi_name)
 
 for stock_code in negative_select_code:
-    print "negative num"
+    print("negative num")
     chi_name = find_stock_chi_name(stock_code)
-    print stock_code, ',', chi_name
+    print(stock_code, ',', chi_name)
 

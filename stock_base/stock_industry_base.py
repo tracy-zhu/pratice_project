@@ -170,6 +170,18 @@ def find_industry_up_limit_stock(industry_df, industry_code, trading_day):
     return up_stock_ind_list
 
 
+def calc_industry_feature(industry_code, start_date, end_date):
+    """
+    计算单行业的平均换手率，过去一段时间的波动率指标
+    :param industry_code:
+    :param start_date:
+    :param end_date:
+    :return:
+    """
+    industry_df = fetch_industry_code_daily_data(industry_code, start_date, end_date)
+    pass
+
+
 if __name__ == '__main__':
     trading_day = '2018-05-09'
     level_flag = 2
