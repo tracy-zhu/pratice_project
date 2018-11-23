@@ -2,44 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e31d8032-faed-4271-b45d-6ecafb189cbf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/fundamental_research/crude_oil_research.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index_select_time/index_momentum.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index_select_time/lead_stock_select_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index_select_time/volatility_difference.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/option_strategy/calc_daily_pcr.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/option_strategy/calc_option_index_select_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/option_strategy/option_open_opportunity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock_base/stock_option_base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stock_high_frequency_analysis/participant_structure_factor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/techiniacl_analysis_stock/degree_of_differentiation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/techiniacl_analysis_stock/rps_indicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project_repository.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project_repository.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depth_quote_research/get_3d_profit.py" beforeDir="false" afterPath="$PROJECT_DIR$/depth_quote_research/get_3d_profit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/future_market_maker/correlation_matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/future_market_maker/correlation_matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_base/Line_Text_To_Best_Marketdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_base/Line_Text_To_Best_Marketdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_base/Python_Osprey_Field.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_base/Python_Osprey_Field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_base/common_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_base/common_method.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_base/plot_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_base/plot_method.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_backtest/parameter_optimization.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_backtest/parameter_optimization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_base/get_trading_day_list.bat" beforeDir="false" afterPath="$PROJECT_DIR$/stock_base/get_trading_day_list.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_base/get_trading_day_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_base/get_trading_day_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_base/stock_backtest_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_base/stock_backtest_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_base/stock_constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_base/stock_constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_base/stock_data_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_base/stock_data_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_base/stock_industry_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_base/stock_industry_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_defensive_analysis/beta_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_defensive_analysis/beta_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_high_frequency_analysis/active_buy_stock.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_high_frequency_analysis/active_buy_stock_week.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_high_frequency_analysis/third_volume_ratio_stock.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_industry_analysis/industry_momentum.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_industry_analysis/industry_momentum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_industry_analysis/industry_strategy_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_industry_analysis/industry_strategy_back_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock_industry_analysis/result/back_test/position_back_test_level.csv" beforeDir="false" afterPath="$PROJECT_DIR$/stock_industry_analysis/result/back_test/position_back_test_level.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techiniacl_analysis_stock/rsrs_research.py" beforeDir="false" afterPath="$PROJECT_DIR$/techiniacl_analysis_stock/rsrs_research.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wind_api/picture/USA national bonds 10Y and spread between CCC.png" beforeDir="false" afterPath="$PROJECT_DIR$/wind_api/picture/USA national bonds 10Y and spread between CCC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wind_api/sql_download.py" beforeDir="false" afterPath="$PROJECT_DIR$/wind_api/sql_download.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wind_api/wind_download.py" beforeDir="false" afterPath="$PROJECT_DIR$/wind_api/wind_download.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,26 +24,26 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="1" />
-          <entry key="py" value="71" />
+          <entry key="py" value="72" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSV" value="1" />
-          <entry key="Python" value="71" />
+          <entry key="Python" value="72" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="5358" />
-          <entry key="py" value="69061" />
+          <entry key="Python Console" value="5369" />
+          <entry key="py" value="69072" />
           <entry key="txt" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="15" />
-          <entry key="Python" value="74419" />
+          <entry key="Python" value="74441" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -121,7 +84,7 @@
             <entry file="file://$PROJECT_DIR$/index_select_time/lead_stock_select_time.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1615">
-                  <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-end-line="83" selection-end-column="31" />
+                  <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
                   <folding>
                     <marker date="1542870771569" expanded="true" signature="1484:3096" ph="..." />
                   </folding>
@@ -148,14 +111,23 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/stock_base/stock_data_api.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="189">
-                  <caret line="791" column="36" selection-start-line="791" selection-start-column="36" selection-end-line="791" selection-end-column="36" />
+                <state relative-caret-position="4557">
+                  <caret line="757" column="18" selection-start-line="757" selection-start-column="18" selection-end-line="757" selection-end-column="18" />
                   <folding>
                     <element signature="e#83#93#0" expanded="true" />
                     <marker date="1542866094889" expanded="true" signature="21483:21692" ph="..." />
                     <marker date="1542866094889" expanded="true" signature="26538:28177" ph="..." />
                     <marker date="1542866094889" expanded="true" signature="27095:28177" ph="..." />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/open_price_strategy/print_xml_file_v2.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="312">
+                  <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
@@ -249,7 +221,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1678" />
@@ -293,6 +265,11 @@
               <item name="project_repository" type="b2602c69:ProjectViewProjectNode" />
               <item name="project_repository" type="462c0819:PsiDirectoryNode" />
               <item name="index_select_time" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project_repository" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project_repository" type="462c0819:PsiDirectoryNode" />
+              <item name="open_price_strategy" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="project_repository" type="b2602c69:ProjectViewProjectNode" />
@@ -477,7 +454,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1419525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -492,7 +470,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920845" weight="0.32910156" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32910156" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50026387" side_tool="true" weight="0.32964602" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49973616" visible="true" weight="0.36172566" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49973616" visible="true" weight="0.31933594" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -527,13 +505,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/techiniacl_analysis_stock/result/holding_profit_3.csv">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/open_price_strategy/print_xml_file_v2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_industry_analysis/industry_index_custom.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -786,19 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stock_base/stock_data_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="791" column="36" selection-start-line="791" selection-start-column="36" selection-end-line="791" selection-end-column="36" />
-          <folding>
-            <element signature="e#83#93#0" expanded="true" />
-            <marker date="1542866094889" expanded="true" signature="21483:21692" ph="..." />
-            <marker date="1542866094889" expanded="true" signature="26538:28177" ph="..." />
-            <marker date="1542866094889" expanded="true" signature="27095:28177" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index_select_time/volatility_difference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
@@ -815,9 +773,29 @@
     <entry file="file://$PROJECT_DIR$/index_select_time/lead_stock_select_time.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1615">
-          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-end-line="83" selection-end-column="31" />
+          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
           <folding>
             <marker date="1542870771569" expanded="true" signature="1484:3096" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/open_price_strategy/print_xml_file_v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stock_base/stock_data_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4557">
+          <caret line="757" column="18" selection-start-line="757" selection-start-column="18" selection-end-line="757" selection-end-column="18" />
+          <folding>
+            <element signature="e#83#93#0" expanded="true" />
+            <marker date="1542866094889" expanded="true" signature="21483:21692" ph="..." />
+            <marker date="1542866094889" expanded="true" signature="26538:28177" ph="..." />
+            <marker date="1542866094889" expanded="true" signature="27095:28177" ph="..." />
           </folding>
         </state>
       </provider>
