@@ -111,8 +111,8 @@ def back_test_by_indicator(constituent_vd):
 
 
 if __name__ == '__main__':
-    start_date = '2010-01-01'
-    end_date = '2018-11-20'
+    start_date = '2017-01-01'
+    end_date = '2018-11-22'
     index_name = 'hs300'
     index_code = '000300.SH'
     constituent_vd = get_constituent_stock_vd(start_date, end_date, index_name)

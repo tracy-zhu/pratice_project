@@ -413,7 +413,7 @@ def get_minute_data(index_code, start_date, end_date, period):
 
 if __name__ == '__main__':
     start_date = '2005-01-01'
-    end_date = '2018-11-21'
+    end_date = '2018-11-22'
     period = '1min'
     index_code = '000300.SH'
     S = 0.7

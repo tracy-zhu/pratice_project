@@ -102,7 +102,7 @@ def get_open_volume_series(instrument_id, trading_day):
             open_volume = get_open_volume(main_quote_data)
             if open_volume != 0:
                 open_volume_list.append(open_volume)
-            print trading_day_str, open_volume
+            print (trading_day_str, open_volume)
     open_volume_arr = np.array(open_volume_list)
     mean_volume = open_volume_arr[:-1].mean()
     last_open_volume = open_volume_list[-1]

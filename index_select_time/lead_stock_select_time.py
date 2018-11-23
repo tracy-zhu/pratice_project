@@ -39,10 +39,13 @@ def absolute_direction_judge(index_stock, index_df):
     absolute_judge_df[absolute_judge_df > 0] = 1
     absolute_judge_df[absolute_judge_df < 0] = -1
     judge_df = stock_pct_df * absolute_judge_df
-    stock_pct_df[judge_df > 0]  = 0
-    indicator_series = stock_pct_df.mean(axis=1)
-    indicator_series[indicator_series > 0] = 1
-    indicator_series[indicator_series < 0] = 0
+    indicator_series = (judge_df < 0).sum(axis=1)
+    indicator_series[indicator_series < 100] = 0
+    indicator_series[indicator_series >= 100] = 1
+    # stock_pct_df[judge_df > 0]  = 0
+    # indicator_series = stock_pct_df.mean(axis=1)
+    # indicator_series[indicator_series > 0] = 1
+    # indicator_series[indicator_series < 0] = 0
     return indicator_series
 
 
@@ -54,7 +57,24 @@ def relative_direction_judge(index_stock, index_df):
     :param index_df: 指数日线表
     :return:
     """
-    pass
+    absolute_judge_dict = defaultdict()
+    stock_pct_dict = defaultdict()
+    index_df = index_df.set_index('time')
+    index_stock = index_stock.set_index('time')
+    for stock_code, group in index_stock.groupby('code'):
+        stock_pct_chg_chg = group["PCT_CHG"].shift(1) - group['PCT_CHG'].shift(2)
+        absolute_judge_dict[stock_code] = index_df['pct_chg'] * stock_pct_chg_chg
+        stock_pct_dict[stock_code] = group["PCT_CHG"]
+    absolute_judge_df = DataFrame(absolute_judge_dict)
+    stock_pct_df = DataFrame(stock_pct_dict)
+    absolute_judge_df[absolute_judge_df > 0] = 1
+    absolute_judge_df[absolute_judge_df < 0] = -1
+    judge_df = stock_pct_df * absolute_judge_df
+    stock_pct_df[judge_df > 0]  = 0
+    indicator_series = stock_pct_df.mean(axis=1)
+    indicator_series[indicator_series > 0] = 1
+    indicator_series[indicator_series < 0] = 0
+    return indicator_series
 
 
 def back_test_by_indicator(indicator_series):
@@ -84,12 +104,15 @@ def back_test_by_indicator(indicator_series):
     strategy_index_ratio.plot()
     return holding_cumprod_pct, index_cumprod_pct
 
+
 if __name__ == '__main__':
-    start_date = '2018-01-01'
+    start_date = '2010-01-01'
     end_date = '2018-11-21'
     index_name = '000300.SH'
     index_stock = get_index_stock_df(start_date, end_date, index_name)
     index_df = get_index_data(index_name, start_date, end_date)
+    indicator_series = absolute_direction_judge(index_stock, index_df)
+    holding_cumprod_pct, index_cumprod_pct = back_test_by_indicator(indicator_series)
     annulized_return, sharpe_ratio, max_drawback = calc_evaluation_index(holding_cumprod_pct)
     index_annulized_return, index_sharpe_ratio, index_drawback = calc_evaluation_index(index_cumprod_pct)
 

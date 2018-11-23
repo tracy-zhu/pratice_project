@@ -123,9 +123,9 @@ def condition_stat(start_date, end_date, index_code, condition_num):
     day_price_change_series = Series(day_price_change_list)
     open_price_change_series.hist()
     day_price_change_series.hist()
-    print open_price_change_series.describe()
-    print day_price_change_series.describe()
-    print sum(day_price_change_series>0)
+    print (open_price_change_series.describe())
+    print (day_price_change_series.describe())
+    print (sum(day_price_change_series>0))
     return open_price_change_series, day_price_change_series
 
 

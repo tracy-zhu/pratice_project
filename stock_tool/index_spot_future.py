@@ -13,7 +13,7 @@ Tue 2018/02/06
 import sys
 import scipy.stats as st
 
-# 导入用户库：
+# 导入用户库：prini
 sys.path.append("..")
 from python_base.plot_method import *
 
@@ -75,7 +75,7 @@ def concat_future_spot(future_df, spot_df):
     spot_yield = np.diff(spot_arr) / spot_arr[:-1]
     # cor, pval = st.pearsonr(future_yield.values[1:], spot_yield.values[1:])
     cor, pval = st.pearsonr(future_yield, spot_yield)
-    print "the correlation of spot index and future is " + str(cor)
+    print ("the correlation of spot index and future is " + str(cor))
 
 
 def get_yield_arr(future_close, spot_close):
